@@ -14,12 +14,16 @@ pipeline {
                 sh ('terraform init') 
             }
         }
+        stage('terraform format check') {
+            steps{
+                sh 'terraform fmt'
+            }
+        }
         
         stage ("terraform Action") {
             steps {
                 echo "Terraform action is --> ${action}"
                 sh ('terraform ${action} --auto-approve') 
-                sh (script: 'YOUR SCRIPT', returnStatus: true)
   
            }
         }
